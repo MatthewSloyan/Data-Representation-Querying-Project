@@ -1,0 +1,80 @@
+<mat-card>
+    <form (submit)="onAddProduct(postForm)" #postForm="ngForm">
+  
+      <mat-form-field class="input-width">
+        <mat-label>Product Title</mat-label>
+        <input 
+          matInput 
+          type="text" 
+          name="title" 
+          ngModel 
+          required 
+          minlength="3" 
+          #title="ngModel">
+        <mat-error *ngIf="title.invalid">Please enter a product title.</mat-error>
+      </mat-form-field>
+
+      <br>
+
+      <mat-form-field class="input-width">
+          <mat-select placeholder="Platform">
+              <mat-option value="ps4">PS4</mat-option>
+              <mat-option value="xbox">XBOX ONE</mat-option>
+              <mat-option value="pc">PC</mat-option>
+              <mat-option value="switch">SWITCH</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+      <br>
+
+      <mat-form-field class="input-width">
+          <mat-label>Price</mat-label>
+          <input 
+            matInput 
+            type="number" 
+            name="price" 
+            ngModel 
+            required 
+            minlength="3" 
+            #price="ngModel">
+          <span matPrefix>€&nbsp;</span>
+          <span matSuffix>.00</span>
+          <mat-error *ngIf="price.invalid">Please enter a valid price.</mat-error>
+        </mat-form-field>
+        
+      <br>
+
+      <mat-form-field class="input-width">
+        <mat-label>Description</mat-label>
+        <textarea
+          matInput
+          rows="4"
+          name="description"
+          ngModel
+          required
+          #description="ngModel"></textarea>
+        <mat-error *ngIf="description.invalid">Please enter a valid description.</mat-error>
+      </mat-form-field>
+
+      <br>
+
+      <mat-form-field class="input-width">
+          <mat-label>Image Link</mat-label>
+          <input 
+            matInput 
+            type="text" 
+            name="link" 
+            ngModel 
+            minlength="3" 
+            #link="ngModel">
+          <mat-error *ngIf="link.invalid">Please enter a valid link to your image.</mat-error>
+        </mat-form-field>
+
+      <br>
+
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit">Add Product</button>
+    </form>
+  </mat-card>

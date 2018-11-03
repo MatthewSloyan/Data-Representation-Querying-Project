@@ -1,0 +1,38 @@
+<!-- <mat-toolbar color='primary'>Posts</mat-toolbar> -->
+
+<!-- <app-post-details></app-post-details> -->
+
+<!-- <mat-sidenav-container fullscreen>
+    <mat-sidenav #sidenav mode="push">
+        <mat-toolbar color="primary"> 
+            <mat-toolbar-row>
+              <button mat-button [routerLink]="['/add']" color="Warn">Add Product</button>
+            </mat-toolbar-row>
+            <mat-toolbar-row>
+                <button mat-button [routerLink]="['/add']" color="Warn">Add Product</button>
+            </mat-toolbar-row>
+          </mat-toolbar>
+    </mat-sidenav>
+  
+    <mat-sidenav-content>
+      <mat-toolbar color="primary"> 
+          <mat-toolbar-row>
+            <button mat-button (click)="sidenav.toggle()">Open</button>
+            <span class="title-center">Video Game Shop</span>
+          </mat-toolbar-row>
+        </mat-toolbar>
+    </mat-sidenav-content>
+</mat-sidenav-container> -->
+
+<mat-toolbar color="primary"> 
+    <mat-toolbar-row>
+        <span class="title-center">Video Game Shop</span>
+    </mat-toolbar-row>
+    
+    <mat-toolbar-row>
+      <button mat-button [routerLink]="['/home']" color="Warn">Home</button>
+      <button mat-button [routerLink]="['/add']" color="Warn">Add Product</button>
+    </mat-toolbar-row>
+</mat-toolbar> 
+
+<router-outlet></router-outlet>
