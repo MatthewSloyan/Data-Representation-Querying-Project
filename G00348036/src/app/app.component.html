@@ -2,29 +2,37 @@
 
 <!-- <app-post-details></app-post-details> -->
 
-<!-- <mat-sidenav-container fullscreen>
+<mat-sidenav-container fullscreen>
     <mat-sidenav #sidenav mode="push">
-        <mat-toolbar color="primary"> 
-            <mat-toolbar-row>
-              <button mat-button [routerLink]="['/add']" color="Warn">Add Product</button>
-            </mat-toolbar-row>
-            <mat-toolbar-row>
-                <button mat-button [routerLink]="['/add']" color="Warn">Add Product</button>
-            </mat-toolbar-row>
-          </mat-toolbar>
+        <mat-toolbar color="primary"> Menu </mat-toolbar>
+        <mat-nav-list>
+            <a mat-list-item [routerLink]="['/home']">
+                <mat-icon matListIcon>home</mat-icon> Home
+            </a>
+          
+            <a mat-list-item [routerLink]="['/add']">
+                <mat-icon matListIcon>add_circle</mat-icon> Add
+            </a>
+        </mat-nav-list>
+        
     </mat-sidenav>
   
     <mat-sidenav-content>
       <mat-toolbar color="primary"> 
           <mat-toolbar-row>
-            <button mat-button (click)="sidenav.toggle()">Open</button>
-            <span class="title-center">Video Game Shop</span>
+            <button mat-button (click)="sidenav.toggle()">
+                <mat-icon matListIcon>menu</mat-icon>
+            </button>
+            <span class="title-center"> Video Game Shop</span>
           </mat-toolbar-row>
         </mat-toolbar>
-    </mat-sidenav-content>
-</mat-sidenav-container> -->
 
-<mat-toolbar color="primary"> 
+        <router-outlet></router-outlet>
+
+    </mat-sidenav-content>
+</mat-sidenav-container>
+
+<!-- <mat-toolbar color="primary"> 
     <mat-toolbar-row>
         <span class="title-center">Video Game Shop</span>
     </mat-toolbar-row>
@@ -35,4 +43,34 @@
     </mat-toolbar-row>
 </mat-toolbar> 
 
-<router-outlet></router-outlet>
+<router-outlet></router-outlet> -->
+
+<!-- <mat-sidenav-container class="sidenav-container">
+    <mat-sidenav #drawer class="sidenav" fixedInViewport="true" mode="push"
+        [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+        [mode]="(isHandset$ | async) ? 'over' : 'side'"
+        [opened]="!(isHandset$ | async)">
+      <mat-toolbar>Menu</mat-toolbar>
+      <mat-nav-list>
+        <a mat-list-item href="#">Link 1</a>
+        <a mat-list-item href="#">Link 2</a>
+        <a mat-list-item href="#">Link 3</a>
+      </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content>
+      <mat-toolbar color="primary">
+        <button
+          type="button"
+          aria-label="Toggle sidenav"
+          mat-icon-button
+          (click)="drawer.toggle()"
+          *ngIf="isHandset$ | async">
+          <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+        </button>
+        <span>G00348036</span>
+      </mat-toolbar>
+
+      <router-outlet></router-outlet>
+      
+    </mat-sidenav-content>
+  </mat-sidenav-container> -->

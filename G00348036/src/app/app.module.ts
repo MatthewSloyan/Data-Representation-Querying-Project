@@ -12,10 +12,12 @@ import { MatInputModule,
   MatSidenavModule,
   MatSelectModule,
   MatCheckboxModule,
-  MatExpansionModule} from '@angular/material';
+  MatExpansionModule, MatIconModule, MatListModule} from '@angular/material';
 
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+
+import { LayoutModule } from '@angular/cdk/layout';
 
 //components
 import { AppComponent } from './app.component';
@@ -51,7 +53,13 @@ const appRoutes: Routes = [
     RouterModule.forRoot(
       appRoutes,
       { enableTracing: true } // <-- debugging purposes only
-    )
+    ),
+
+    LayoutModule,
+
+    MatIconModule,
+
+    MatListModule
   ],
   providers: [],
   bootstrap: [AppComponent]
