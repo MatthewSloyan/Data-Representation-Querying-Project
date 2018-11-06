@@ -12,6 +12,7 @@ import { MatInputModule,
   MatSidenavModule,
   MatSelectModule,
   MatCheckboxModule,
+  MatGridListModule,
   MatExpansionModule, MatIconModule, MatListModule} from '@angular/material';
 
 import { RouterModule, Routes } from '@angular/router';
@@ -48,6 +49,7 @@ const appRoutes: Routes = [
     MatCheckboxModule,
     MatOptionModule,
     MatSelectModule,
+    MatGridListModule,
     FormsModule,
 
     RouterModule.forRoot(

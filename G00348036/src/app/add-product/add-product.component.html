@@ -16,14 +16,14 @@
 
       <br>
 
-      <mat-form-field class="input-width">
-          <mat-select placeholder="Platform" name="platform" required>
-              <mat-option value="ps4">PS4</mat-option>
-              <mat-option value="xbox">XBOX ONE</mat-option>
-              <mat-option value="pc">PC</mat-option>
-              <mat-option value="switch">SWITCH</mat-option>
-          </mat-select>
-        </mat-form-field>
+      <mat-form-field>
+        <mat-select [(ngModel)]="platform" required name="platform" placeholder="Platform">
+          <mat-option value="PS4">PS4</mat-option>
+          <mat-option value="XBOX">XBOX ONE</mat-option>
+          <mat-option value="PC">PC</mat-option>
+          <mat-option value="SWITCH">SWITCH</mat-option>
+        </mat-select>
+      </mat-form-field>
 
       <br>
 

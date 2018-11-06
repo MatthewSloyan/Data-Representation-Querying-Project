@@ -3,6 +3,10 @@ var app = express();
 var path = require('path');
 var bodyParser = require("body-parser");
 
+//Here we are configuring express to use body-parser as middle-ware.
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
 //MongoDB connection
 var mongoose = require('mongoose');
 var mongoDB = 'mongodb://Matthew:designwest43@ds145053.mlab.com:45053/data_representation_project';
@@ -20,6 +24,7 @@ var productSchema = new Schema({
 
 var PostModel = mongoose.model('product', productSchema);
 
+//coors setup
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Headers",
@@ -27,9 +32,17 @@ app.use(function(req, res, next) {
     next();
 });
 
+//server setup    
+var server = app.listen(8081, function () {
+    var host = server.address().address
+    var port = server.address().port
+    
+    console.log("Example app listening at http://%s:%s", host, port)
+ })
+
 //welcome message
 app.get('/', function (req, res) {
-   res.send('Welcome to Data Representation & Querying\n');
+   res.send('Welcome to Data Representation & Querying Project\n');
 })
 
 //return JSON data when requested 
@@ -41,8 +54,6 @@ app.get('/api/posts', function (req, res) {
         }
         res.json(data);
     });
-
-    res.send('Hello\n');
 })
 
 /* app.get('/getposts/:title', function (req, res) {
@@ -60,10 +71,6 @@ app.get('/api/posts', function (req, res) {
     //if (err) return handleError(err);
     // deleted at most one post document
 //});
-
-//Here we are configuring express to use body-parser as middle-ware.
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
 
 //POST method which console logs data passed up to the server
 app.post('/api/posts', function (req, res) {
@@ -83,10 +90,3 @@ app.post('/api/posts', function (req, res) {
     })
 })
 
-//server setup    
-var server = app.listen(8081, function () {
-   var host = server.address().address
-   var port = server.address().port
-   
-   console.log("Example app listening at http://%s:%s", host, port)
-})

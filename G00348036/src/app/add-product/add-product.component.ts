@@ -14,6 +14,8 @@ export class AddProductComponent implements OnInit {
   onAddProduct(form: NgForm) {
     this.service.addProduct(form.value.title, form.value.platform, form.value.price, form.value.description, form.value.link).subscribe();
     form.resetForm();
+
+    console.log("Hello " + form.value.platform);
   }
 
   ngOnInit() {
