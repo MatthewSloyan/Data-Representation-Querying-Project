@@ -1,4 +1,4 @@
-<mat-card>
+<mat-card *ngIf="userStorage == null">
   <form (submit)="onLogin(postForm)" #postForm="ngForm">
 
     <mat-form-field class="input-width">
@@ -33,4 +33,12 @@
 
     <button mat-raised-button color="primary" type="submit">Login</button>
   </form>
+</mat-card>
+
+<mat-card *ngIf="userStorage != null">
+    <mat-card-content>
+        <p>Please log out, to change users.</p>
+    </mat-card-content>
+
+  <button mat-raised-button color="primary" (click)="onLogOut()">Log Out</button>
 </mat-card>

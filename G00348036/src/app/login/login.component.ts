@@ -3,6 +3,7 @@ import { NgForm } from "@angular/forms";
 import { ProductsUserService } from '../services/products-user.service';
 import {MatSnackBar} from '@angular/material';
 import { Router } from '@angular/router';
+import { AppComponent } from '../app.component';
 
 @Component({
   selector: 'app-login',
@@ -11,9 +12,10 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private service: ProductsUserService, public snackBar: MatSnackBar, private router: Router) { }
+  constructor(private service: ProductsUserService, public snackBar: MatSnackBar, private router: Router, private c: AppComponent) { }
 
   user: any = [];
+  userStorage: any;
   userName: any;
   foundUser: any = false;
 
@@ -34,19 +36,16 @@ export class LoginComponent implements OnInit {
       for (var i = 0; i < this.user.length; i++) {
         if (form.value.userName == this.user[i].userName && form.value.password == this.user[i].password )
         {
-          //console.log("Hello" + this.userName);
-
+          //console.log("Hello" + this.userName)
           this.foundUser = true;
 
           this.userData.userName = this.user[i].userName;
           this.userData.id = this.user[i]._id;
           this.userData.isLoggedIn = true;
-          console.log(this.userData);
-
-          localStorage.clear();
 
           sessionStorage.setItem('user', JSON.stringify(this.userData));
 
+          this.c.ngOnInit();
           this.router.navigateByUrl('home');
         }
       }
@@ -63,8 +62,15 @@ export class LoginComponent implements OnInit {
     });
   }
 
+  onLogOut() {
+    sessionStorage.clear();
+    this.c.userData = "";
+    this.ngOnInit();
+  }
+
   ngOnInit() {
-    
+    this.userStorage = JSON.parse(sessionStorage.getItem('user'));
+    console.log(this.userData);
   }
 
 }

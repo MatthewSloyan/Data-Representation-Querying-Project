@@ -144,14 +144,18 @@ app.get('/api/users', function (req, res) {
     });
 })
 
-app.get('/api/users/:user', function (req, res) {
+app.get('/api/users/:id', function (req, res) {
     //console.log("Get " + req.params.userName + " Post");
-    PostModelUser.findOne({ userName: req.params.user },
+    PostModelUser.findOne({ _id: req.params.id },
 
     function (err, data) {
-        if (err)
-        return handleError(err);
-        res.json(data);
+        if (err){
+            return handleError(err);
+        }
+        else {
+            res.json(data);
+        }
+        
         console.log("Get " + data);
     });
 });

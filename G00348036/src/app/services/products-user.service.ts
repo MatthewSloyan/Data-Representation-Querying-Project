@@ -51,6 +51,10 @@ export class ProductsUserService {
     return [...this.loginUser];
   }
 
+  getUserData(id: String):Observable<any>{
+    return this.http.get("http://localhost:8081/api/users/"+id);
+  }
+
   getLoginData(): Observable<any> {
     return this.http.get("http://127.0.0.1:8081/api/users");
   }

@@ -7,4 +7,13 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'G00348036';
+
+  userData: any;
+
+  constructor() { }
+
+  ngOnInit() {
+    this.userData = JSON.parse(sessionStorage.getItem('user'));
+    console.log(this.userData);
+  }
 }

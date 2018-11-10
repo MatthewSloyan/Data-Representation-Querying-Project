@@ -12,12 +12,16 @@
             <a mat-list-item [routerLink]="['/add']">
                 <mat-icon matListIcon>add_circle</mat-icon> Add
             </a>
+            <a mat-list-item [routerLink]="['/profile']">
+                <mat-icon matListIcon>supervised_user_circle</mat-icon> Profile
+            </a>
             <a mat-list-item [routerLink]="['/login']">
                 <mat-icon matListIcon>person</mat-icon> Login
             </a>
             <a mat-list-item [routerLink]="['/signup']">
                 <mat-icon matListIcon>person_add</mat-icon> Sign-Up
             </a>
+            
         </mat-nav-list>
         
     </mat-sidenav>
@@ -28,7 +32,13 @@
             <button mat-button (click)="sidenav.toggle()">
                 <mat-icon matListIcon>menu</mat-icon>
             </button>
-            <span class="title-center"> Video Game Shop</span>
+            <h2>Video Game Shop</h2>
+
+            <span class="spacer"></span>
+
+            <mat-icon class="user-div" [routerLink]="['/profile']" *ngIf="userData != null" matListIcon>person</mat-icon>
+            <p class="user-div"> {{userData.userName}}</p>
+            
           </mat-toolbar-row>
         </mat-toolbar>
 
