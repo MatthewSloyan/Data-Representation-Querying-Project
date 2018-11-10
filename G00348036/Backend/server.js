@@ -12,6 +12,7 @@ var mongoose = require('mongoose');
 var mongoDB = 'mongodb://Matthew:designwest43@ds145053.mlab.com:45053/data_representation_project';
 mongoose.connect(mongoDB);
 
+//PRODUCT
 //using the interface variables 
 var Schema = mongoose.Schema;
 var productSchema = new Schema({
@@ -24,14 +25,28 @@ var productSchema = new Schema({
 
 var PostModel = mongoose.model('product', productSchema);
 
+//USER
+//using the interface variables 
+var SchemaUser = mongoose.Schema;
+var productSchemaUser = new SchemaUser({
+    firstName : String,
+    lastName : String,
+    email : String,
+    userName : String,
+    password : String
+})
+
+var PostModelUser = mongoose.model('user', productSchemaUser);
+
 //coors setup
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Methods", "GET, POST, DELETE, PUT, OPTIONS")
     res.header("Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content-Type, Accept");
     next();
 });
-
+    
 //server setup    
 var server = app.listen(8081, function () {
     var host = server.address().address
@@ -88,5 +103,55 @@ app.post('/api/posts', function (req, res) {
         description:req.body.description,
         link:req.body.link
     })
+    res.send('Product added');
 })
 
+//delete the data from the server using the id
+app.delete('/api/posts/:id', function(req,res){
+    PostModel.deleteOne({ _id: req.params.id },
+    function (err) {});
+})
+
+//USER CODE
+//POST method which console logs data passed up to the server
+app.post('/api/users', function (req, res) {
+    console.log("Title = " + req.body.firstName);
+    console.log("Platform = " + req.body.lastName);
+    console.log("Price = " + req.body.email);
+    console.log("Description = " + req.body.userName);
+    console.log("Link = " + req.body.password);
+
+    //mongo post
+    PostModelUser.create({
+        firstName:req.body.firstName,
+        lastName:req.body.lastName,
+        email:req.body.email,
+        userName:req.body.userName,
+        password:req.body.password
+    })
+    res.send('User added');
+})
+
+//return JSON data when requested 
+app.get('/api/users', function (req, res) {
+
+    PostModelUser.find(function(err, data){
+        if (err){
+            res.send(err);
+        }
+        res.json(data);
+        console.log(data);
+    });
+})
+
+app.get('/api/users/:user', function (req, res) {
+    //console.log("Get " + req.params.userName + " Post");
+    PostModelUser.findOne({ userName: req.params.user },
+
+    function (err, data) {
+        if (err)
+        return handleError(err);
+        res.json(data);
+        console.log("Get " + data);
+    });
+});

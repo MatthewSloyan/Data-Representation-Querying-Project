@@ -13,7 +13,10 @@ import { MatInputModule,
   MatSelectModule,
   MatCheckboxModule,
   MatGridListModule,
-  MatExpansionModule, MatIconModule, MatListModule} from '@angular/material';
+  MatExpansionModule, 
+  MatIconModule, 
+  MatListModule,
+  MatSnackBarModule} from '@angular/material';
 
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
@@ -24,17 +27,23 @@ import { LayoutModule } from '@angular/cdk/layout';
 import { AppComponent } from './app.component';
 import { HomePageComponent } from './home-page/home-page.component';
 import { AddProductComponent } from './add-product/add-product.component';
+import { LoginComponent } from './login/login.component';
+import { SignUpComponent } from './sign-up/sign-up.component';
 
 const appRoutes: Routes = [
   { path: 'home', component: HomePageComponent },
   { path: 'add', component: AddProductComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'signup', component: SignUpComponent },
 ];
 
 @NgModule({
   declarations: [
     AppComponent,
     HomePageComponent,
-    AddProductComponent
+    AddProductComponent,
+    LoginComponent,
+    SignUpComponent
   ],
   imports: [
     BrowserModule,
@@ -50,6 +59,7 @@ const appRoutes: Routes = [
     MatOptionModule,
     MatSelectModule,
     MatGridListModule,
+    MatSnackBarModule,
     FormsModule,
 
     RouterModule.forRoot(
