@@ -1,8 +1,20 @@
-<mat-card>
+<mat-card *ngIf="userData != null">
     <mat-card-content>
-        <p>Name: {{ users.firstName }} {{ users.lastName }}</p>
-        <p>Email: {{ users.email }}</p>
-        <p>Username: {{ users.userName }}</p>
-        <p>Password: {{ users.password }}</p>
+        <p><b>Name:</b> {{ users.firstName }} {{ users.lastName }}</p>
+        <p><b>Email:</b> {{ users.email }}</p>
+        <p><b>Username:</b> {{ users.userName }}</p>
+        <p><b>Password:</b> {{ users.password }}</p>
     </mat-card-content>
+
+    <button mat-button color="primary" [routerLink]="['/edit', userData.id]">EDIT</button>
+
+    <button mat-raised-button color="primary" (click)="onLogOut()">Log Out</button>
+</mat-card>
+
+<mat-card *ngIf="userData == null">
+    <mat-card-content>
+        <p>Please log in to view your profile.</p>
+    </mat-card-content>
+
+  <button mat-raised-button color="primary" [routerLink]="['/login']">Log In</button>
 </mat-card>

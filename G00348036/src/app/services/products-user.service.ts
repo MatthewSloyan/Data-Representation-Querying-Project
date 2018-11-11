@@ -15,6 +15,7 @@ export class ProductsUserService {
   private user: User[] = [];
   private loginUser: User[] = [];
 
+  //PRODUCT
   //gets JSON data from server
   getProductData(): Observable<any> {
     return this.http.get("http://127.0.0.1:8081/api/posts");
@@ -38,6 +39,7 @@ export class ProductsUserService {
     return this.http.delete("http://localhost:8081/api/posts/"+id);
   }
 
+  //USER
   //add a user to the server
   addUser(firstName: string, lastName: string, email: number, userName: string, password: string): Observable<any> 
   {
@@ -55,7 +57,8 @@ export class ProductsUserService {
     return this.http.get("http://localhost:8081/api/users/"+id);
   }
 
+  //LOGIN
   getLoginData(): Observable<any> {
     return this.http.get("http://127.0.0.1:8081/api/users");
-  }
+  } 
 }

@@ -1,0 +1,46 @@
+<mat-card>
+  <form (submit)="onSignup(postForm)" #postForm="ngForm">
+
+    <mat-form-field class="input-width">
+      <mat-label>First Name</mat-label>
+        <input matInput type="text" name="firstName" ngModel={{user.firstName}} required #firstName="ngModel">
+      <mat-error *ngIf="firstName.invalid">Please enter a valid first name.</mat-error>
+    </mat-form-field>
+
+    <br>
+
+    <mat-form-field class="input-width">
+      <mat-label>Last Name</mat-label>
+        <input matInput type="text" name="lastName" ngModel={{user.lastName}} required #lastName="ngModel">
+      <mat-error *ngIf="lastName.invalid">Please enter a valid last name.</mat-error>
+    </mat-form-field>
+
+    <br>
+
+    <mat-form-field class="input-width">
+      <mat-label>Email</mat-label>
+        <input matInput type="email" name="email" ngModel={{user.email}} required #email="ngModel">
+      <mat-error *ngIf="email.invalid">Please enter a valid email.</mat-error>
+    </mat-form-field>
+
+    <br>
+
+    <mat-form-field class="input-width">
+      <mat-label>User Name</mat-label>
+        <input matInput type="text" name="userName" ngModel={{user.userName}} required minlength="3" #userName="ngModel">
+      <mat-error *ngIf="userName.invalid">Please enter a valid user name.</mat-error>
+    </mat-form-field>
+
+    <br>
+
+    <mat-form-field class="input-width">
+      <mat-label>Password</mat-label>
+      <input matInput type="password" name="password" ngModel={{user.password}} required minlength="3" #password="ngModel">
+      <mat-error *ngIf="password.invalid">Please enter a valid password</mat-error>
+    </mat-form-field>
+
+    <br>
+
+    <button mat-raised-button color="primary" type="submit">EDIT</button>
+  </form>
+</mat-card>

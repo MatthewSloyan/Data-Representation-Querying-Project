@@ -14,7 +14,7 @@
         <mat-card-actions>
           <b>€{{ product.price }}.00</b>
           <button mat-button color="primary">ADD TO CART</button>
-          <button (click)="onDelete(product._id)" mat-button color="warn">DELETE</button>
+          <button *ngIf="userStorage != null" (click)="onDelete(product._id)" mat-button color="warn">DELETE</button>
         </mat-card-actions>
       </mat-card>
 

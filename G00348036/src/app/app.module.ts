@@ -30,6 +30,7 @@ import { AddProductComponent } from './add-product/add-product.component';
 import { LoginComponent } from './login/login.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { ProfileComponent } from './profile/profile.component';
+import { EditUserComponent } from './edit-user/edit-user.component';
 
 const appRoutes: Routes = [
   { path: 'home', component: HomePageComponent },
@@ -37,6 +38,7 @@ const appRoutes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'signup', component: SignUpComponent },
   { path: 'profile', component: ProfileComponent },
+  { path: 'edit/:id', component: EditUserComponent },
 ];
 
 @NgModule({
@@ -46,7 +48,8 @@ const appRoutes: Routes = [
     AddProductComponent,
     LoginComponent,
     SignUpComponent,
-    ProfileComponent
+    ProfileComponent,
+    EditUserComponent
   ],
   imports: [
     BrowserModule,

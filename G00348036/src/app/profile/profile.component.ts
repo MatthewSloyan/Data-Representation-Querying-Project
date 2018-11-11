@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ProductsUserService } from '../services/products-user.service';
 import { Observable } from 'rxjs';
 import {User} from '../user.model';
+import { AppComponent } from '../app.component';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-profile',
@@ -10,7 +12,7 @@ import {User} from '../user.model';
 })
 export class ProfileComponent implements OnInit {
 
-  constructor(private service: ProductsUserService) { }
+  constructor(private service: ProductsUserService, private c: AppComponent) { }
 
   users: any = [];
   id: String;
@@ -18,11 +20,17 @@ export class ProfileComponent implements OnInit {
 
   ngOnInit() {
     this.userData = JSON.parse(sessionStorage.getItem('user'));
-    console.log(this.userData);
+    console.log("Test" + this.userData.userName);
 
     this.service.getUserData(this.userData.id).subscribe(data =>{
       this.users = data;
       console.log(this.users);
     });
+  }
+
+  onLogOut() {
+    sessionStorage.clear();
+    this.c.userData = "";
+    this.ngOnInit();
   }
 }

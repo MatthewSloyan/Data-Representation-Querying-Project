@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -10,10 +11,12 @@ export class AppComponent {
 
   userData: any;
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
     this.userData = JSON.parse(sessionStorage.getItem('user'));
     console.log(this.userData);
+
+    this.router.navigate(['/home']);
   }
 }
