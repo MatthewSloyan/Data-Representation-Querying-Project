@@ -31,6 +31,7 @@ import { LoginComponent } from './login/login.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { ProfileComponent } from './profile/profile.component';
 import { EditUserComponent } from './edit-user/edit-user.component';
+import { CartComponent } from './cart/cart.component';
 
 const appRoutes: Routes = [
   { path: 'home', component: HomePageComponent },
@@ -39,6 +40,7 @@ const appRoutes: Routes = [
   { path: 'signup', component: SignUpComponent },
   { path: 'profile', component: ProfileComponent },
   { path: 'edit/:id', component: EditUserComponent },
+  { path: 'cart', component: CartComponent },
 ];
 
 @NgModule({
@@ -49,7 +51,8 @@ const appRoutes: Routes = [
     LoginComponent,
     SignUpComponent,
     ProfileComponent,
-    EditUserComponent
+    EditUserComponent,
+    CartComponent
   ],
   imports: [
     BrowserModule,

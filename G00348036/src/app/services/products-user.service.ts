@@ -48,6 +48,13 @@ export class ProductsUserService {
     return this.http.post("http://127.0.0.1:8081/api/users", user);
   }
 
+  updateUser(id: string, firstName: string, lastName: string, email: number, userName: string, password: string): Observable<any> {
+    const user: User = {firstName: firstName, lastName: lastName, email: email, userName: userName, password: password};
+    return this.http.put("http://localhost:8081/api/users/"+id, user);
+    //console.log("Update User " + id);
+    //console.log(user);
+  }
+
   //gets posted data
   getUser() {
     return [...this.loginUser];

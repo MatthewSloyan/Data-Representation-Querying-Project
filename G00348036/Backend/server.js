@@ -48,7 +48,7 @@ app.use(function(req, res, next) {
 });
     
 //server setup    
-var server = app.listen(8081, function () {
+var server = app.listen(8081, function ()  {
     var host = server.address().address
     var port = server.address().port
     
@@ -156,6 +156,13 @@ app.get('/api/users/:id', function (req, res) {
             res.json(data);
         }
         
-        console.log("Get " + data);
+       // console.log("Get " + data);
+    });
+});
+
+app.put('/api/users/:id', function(req,res){
+    PostModelUser.findByIdAndUpdate(req.params.id, req.body, function (err, data) {
+    if (err) return next(err);
+    res.json(data);
     });
 });

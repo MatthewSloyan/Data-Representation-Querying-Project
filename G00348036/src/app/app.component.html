@@ -5,7 +5,7 @@
 <mat-sidenav-container fullscreen>
     <mat-sidenav #sidenav mode="push">
         <mat-toolbar color="primary"> Menu </mat-toolbar>
-        <mat-nav-list>
+        <mat-nav-list> 
             <a mat-list-item [routerLink]="['/home']">
                 <mat-icon matListIcon>home</mat-icon> Home
             </a>
@@ -20,6 +20,9 @@
             </a>
             <a mat-list-item [routerLink]="['/signup']">
                 <mat-icon matListIcon>person_add</mat-icon> Sign-Up
+            </a>
+            <a mat-list-item [routerLink]="['/cart']">
+                <mat-icon matListIcon>shopping_cart</mat-icon> Cart
             </a>
             
         </mat-nav-list>
