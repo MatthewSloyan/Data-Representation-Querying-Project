@@ -3,6 +3,7 @@ import {HttpClient} from '@angular/common/http';
 import { Observable } from 'rxjs';
 import {Product} from '../product.model';
 import {User} from '../user.model';
+import {ProductCart} from '../productCart.model';
 
 @Injectable({
   providedIn: 'root'
@@ -41,19 +42,20 @@ export class ProductsUserService {
 
   //USER
   //add a user to the server
-  addUser(firstName: string, lastName: string, email: number, userName: string, password: string): Observable<any> 
+  addUser(firstName: string, lastName: string, email: number, userName: string, password: string, productsCart: ProductCart[]): Observable<any> 
   {
-    const user: User = {firstName: firstName, lastName: lastName, email: email, userName: userName, password: password};
+    const user: User = {firstName: firstName, lastName: lastName, email: email, 
+      userName: userName, password: password, productsCart};
     
     return this.http.post("http://127.0.0.1:8081/api/users", user);
   }
 
-  updateUser(id: string, firstName: string, lastName: string, email: number, userName: string, password: string): Observable<any> {
-    const user: User = {firstName: firstName, lastName: lastName, email: email, userName: userName, password: password};
+  updateUser(id: string, firstName: string, lastName: string, email: number, userName: string, password: string, productsCart: ProductCart[]): Observable<any> {
+    const user: User = {firstName: firstName, lastName: lastName, email: email, userName: userName, password: password, productsCart};
     return this.http.put("http://localhost:8081/api/users/"+id, user);
     //console.log("Update User " + id);
     //console.log(user);
-  }
+  } 
 
   //gets posted data
   getUser() {

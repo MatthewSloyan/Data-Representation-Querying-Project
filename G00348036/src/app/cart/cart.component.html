@@ -1,9 +1,10 @@
 <mat-list>
-  <h3 mat-subheader>Folders</h3>
+  <h3 mat-subheader>Items</h3>
   <mat-list-item *ngFor="let c of cart">
     <mat-icon mat-list-icon>folder</mat-icon>
     <h4 mat-line>{{c.title}}</h4>
-    <p mat-line> {{c.description}} </p>
+    <p mat-line> {{c.platform}} </p>
+    <mat-divider></mat-divider>
   </mat-list-item>
   <mat-divider></mat-divider>
 </mat-list>

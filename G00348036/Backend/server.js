@@ -25,6 +25,9 @@ var productSchema = new Schema({
 
 var PostModel = mongoose.model('product', productSchema);
 
+var SchemaCart = mongoose.Schema;
+var CartSchema = new SchemaCart({ title: String, platform: String, price: Number });
+
 //USER
 //using the interface variables 
 var SchemaUser = mongoose.Schema;
@@ -33,7 +36,11 @@ var productSchemaUser = new SchemaUser({
     lastName : String,
     email : String,
     userName : String,
-    password : String
+    password : String,
+    productsCart: [CartSchema],
+    //productsCart: {
+        //productsCart: { productsCart: any }
+    //},
 })
 
 var PostModelUser = mongoose.model('user', productSchemaUser);
@@ -120,6 +127,7 @@ app.post('/api/users', function (req, res) {
     console.log("Price = " + req.body.email);
     console.log("Description = " + req.body.userName);
     console.log("Link = " + req.body.password);
+    console.log("Cart = " + req.body.productsCart);
 
     //mongo post
     PostModelUser.create({
@@ -127,7 +135,8 @@ app.post('/api/users', function (req, res) {
         lastName:req.body.lastName,
         email:req.body.email,
         userName:req.body.userName,
-        password:req.body.password
+        password:req.body.password,
+        productsCart:req.body.productsCart,
     })
     res.send('User added');
 })
@@ -164,5 +173,7 @@ app.put('/api/users/:id', function(req,res){
     PostModelUser.findByIdAndUpdate(req.params.id, req.body, function (err, data) {
     if (err) return next(err);
     res.json(data);
+
+     console.log("Get " + data);
     });
 });

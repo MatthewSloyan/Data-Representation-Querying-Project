@@ -1,9 +1,9 @@
 <mat-grid-list cols="{{columns}}" rowHeight="450px" (window:resize)="Resize($event)">
-  <mat-grid-tile *ngFor="let product of products; let d of descriptionSubString">
+  <mat-grid-tile *ngFor="let product of products; index as i">
   
       <mat-card class="product-card">
         <mat-card-header>
-          <img mat-card-avatar src="{{platformImage}}" alt="Cannot display image">
+          <img mat-card-avatar src="{{platformImage[i]}}" alt="Cannot display image">
           <mat-card-title>{{ product.title }}</mat-card-title>
           <mat-card-subtitle>{{ product.platform }}</mat-card-subtitle>
         </mat-card-header>
@@ -13,7 +13,7 @@
         </mat-card-content>
         <mat-card-actions>
           <b>€{{ product.price }}.00</b>
-          <button mat-button color="primary">ADD TO CART</button>
+          <button mat-button color="primary" (click)="addToCart(product.title, product.platform, product.price)">ADD TO CART</button>
           <button *ngIf="userStorage != null" (click)="onDelete(product._id)" mat-button color="warn">DELETE</button>
         </mat-card-actions>
       </mat-card>
