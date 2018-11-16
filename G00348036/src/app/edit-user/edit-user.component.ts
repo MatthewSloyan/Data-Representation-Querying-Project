@@ -16,6 +16,12 @@ export class EditUserComponent implements OnInit {
 
   user: any = [];
 
+  userDataInitial = {
+    userName: "",
+    id: "",
+    isLoggedIn: false,
+  }
+
   ngOnInit() {
     console.log(this.route.snapshot.params['id']);
 
@@ -35,7 +41,7 @@ export class EditUserComponent implements OnInit {
   }
 
   onLogOut() {
-    sessionStorage.clear();
-    this.c.userData = "";
+    sessionStorage.setItem('user', JSON.stringify(this.userDataInitial));
+    this.c.onLogOut();
   }
 }

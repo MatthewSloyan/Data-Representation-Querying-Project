@@ -12,7 +12,7 @@ import { AppComponent } from '../app.component';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private service: ProductsUserService, public snackBar: MatSnackBar, private router: Router, private c: AppComponent) { }
+  constructor(private service: ProductsUserService, private snackBar: MatSnackBar, private router: Router, private c: AppComponent) { }
 
   user: any = [];
   userStorage: any;
@@ -36,16 +36,18 @@ export class LoginComponent implements OnInit {
       for (var i = 0; i < this.user.length; i++) {
         if (form.value.userName == this.user[i].userName && form.value.password == this.user[i].password )
         {
-          //console.log("Hello" + this.userName)
+          console.log("Hello")
           this.foundUser = true;
 
           this.userData.userName = this.user[i].userName;
           this.userData.id = this.user[i]._id;
           this.userData.isLoggedIn = true;
 
+          console.log(this.userData);
+
           sessionStorage.setItem('user', JSON.stringify(this.userData));
 
-          this.c.ngOnInit();
+          this.c.onLogin();
           this.router.navigateByUrl('home');
         }
       }
@@ -63,8 +65,8 @@ export class LoginComponent implements OnInit {
   }
 
   onLogOut() {
-    sessionStorage.clear();
-    this.c.userData = "";
+    sessionStorage.setItem('user', JSON.stringify(this.userData));
+    this.c.onLogOut();
     this.ngOnInit();
   }
 

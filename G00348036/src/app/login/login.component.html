@@ -1,4 +1,4 @@
-<mat-card *ngIf="userStorage == null">
+<mat-card *ngIf="userStorage.isLoggedIn == false">
   <form (submit)="onLogin(postForm)" #postForm="ngForm">
 
     <mat-form-field class="input-width">
@@ -35,7 +35,7 @@
   </form>
 </mat-card>
 
-<mat-card *ngIf="userStorage != null">
+<mat-card *ngIf="userStorage.isLoggedIn != false">
     <mat-card-content>
         <p>Please log out, to change users.</p>
     </mat-card-content>

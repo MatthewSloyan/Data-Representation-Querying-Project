@@ -1,4 +1,4 @@
-<mat-card *ngIf="userData != null">
+<mat-card *ngIf="userData.isLoggedIn != false">
     <mat-card-content>
         <p><b>Name:</b> {{ users.firstName }} {{ users.lastName }}</p>
         <p><b>Email:</b> {{ users.email }}</p>
@@ -11,7 +11,7 @@
     <button mat-raised-button color="primary" (click)="onLogOut()">Log Out</button>
 </mat-card>
 
-<mat-card *ngIf="userData == null">
+<mat-card *ngIf="userData.isLoggedIn == false">
     <mat-card-content>
         <p>Please log in to view your profile.</p>
     </mat-card-content>

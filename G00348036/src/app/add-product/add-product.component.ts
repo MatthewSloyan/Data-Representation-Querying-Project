@@ -11,6 +11,8 @@ export class AddProductComponent implements OnInit {
 
   constructor(private service: ProductsUserService) { }
 
+  colour: string = "primary";
+
   onAddProduct(form: NgForm) {
     this.service.addProduct(form.value.title, form.value.platform, form.value.price, form.value.description, form.value.link).subscribe();
     form.resetForm();

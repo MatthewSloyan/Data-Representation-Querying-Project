@@ -9,7 +9,7 @@
             <a mat-list-item [routerLink]="['/home']">
                 <mat-icon matListIcon>home</mat-icon> Home
             </a>
-            <a mat-list-item [routerLink]="['/add']">
+            <a mat-list-item [routerLink]="['/add']" *ngIf="userData.userName == 'Admin'">
                 <mat-icon matListIcon>add_circle</mat-icon> Add
             </a>
             <a mat-list-item [routerLink]="['/profile']">
@@ -39,7 +39,7 @@
 
             <span class="spacer"></span>
 
-            <mat-icon class="user-div" [routerLink]="['/profile']" *ngIf="userData != null" matListIcon>person</mat-icon>
+            <mat-icon class="user-div" [routerLink]="['/profile']" *ngIf="userData.isLoggedIn != false" matListIcon>person</mat-icon>
             <p class="user-div"> {{userData.userName}}</p>
             
           </mat-toolbar-row>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ProductsUserService } from '../services/products-user.service';
 import { Observable } from 'rxjs';
+import {MatSnackBar} from '@angular/material';
 import {Product} from '../product.model';
 import {ProductCart} from '../productCart.model';
 
@@ -11,7 +12,7 @@ import {ProductCart} from '../productCart.model';
 })
 export class HomePageComponent implements OnInit {
 
-  constructor(private service: ProductsUserService) { }
+  constructor(private service: ProductsUserService, private snackBar: MatSnackBar) { }
 
   products: any = [];
   columns: any = 4;
@@ -22,6 +23,7 @@ export class HomePageComponent implements OnInit {
   //descriptionSubString: any = [];
 
   user: any = [];
+  userStorage: any;
   //cart: ProductCart[];
   userData: any = [];
 
@@ -29,6 +31,8 @@ export class HomePageComponent implements OnInit {
   count: number = 0;
 
   ngOnInit() {
+
+    this.userStorage = JSON.parse(sessionStorage.getItem('user'));
 
     this.service.getProductData().subscribe(data =>{
       this.products = data;
@@ -46,27 +50,23 @@ export class HomePageComponent implements OnInit {
   
         this.products[i].description = this.products[i].description.substr(0,140) + "...";
 
-        if (this.products[i].platform == "PS4") {
+        if (this.products[i].platform == "PS4") { 
           this.platformImage[i] = "https://cdn3.iconfinder.com/data/icons/flat-icons-web/40/PlayStation-512.png";
         } 
         else if (this.products[i].platform  == "XBOX") {
-          this.platformImage[i] = "https://cdn2.iconfinder.com/data/icons/metro-uinvert-dock/256/XBox_360.png";
+          this.platformImage[i] = "https://images.techhive.com/images/article/2015/03/xbox-logo-100571878-large.jpg";
         }
         else if (this.products[i].platform  == "PC") {
-          this.platformImage[i] = "http://simpleicon.com/wp-content/uploads/pc.png";
+          this.platformImage[i] = "https://image.shutterstock.com/image-vector/pc-icon-illustration-isolated-vector-260nw-567477793.jpg";
         }
         else if (this.products[i].platform  == "SWITCH") {
-          this.platformImage[i] = "https://vignette.wikia.nocookie.net/crypt-of-the-necrodancer/images/f/fc/Nintendo_Switch_icon.png/revision/latest?cb=20180517200137";
+          this.platformImage[i] = "https://i.ytimg.com/vi/iTadxMf75As/maxresdefault.jpg";
         }
       }
-
-      console.log(this.platformImage);
 
       //console.log(this.descriptionSubString);
       //this.descriptionSubString = this.products.platform.substr(1,2)
     });
-    
-    this.getPlatformLink();
   }
 
   onDelete(id: string){
@@ -82,43 +82,33 @@ export class HomePageComponent implements OnInit {
 
     this.userData = JSON.parse(sessionStorage.getItem('user'));
 
-    this.service.getUserData(this.userData.id).subscribe(data =>
-    {
-      this.user = data;
+    if (this.userData.isLoggedIn == false){
+      this.snackBar.open('Please login to add to cart!', 'Undo', {
+        duration: 2000
+      });
+    }
+    else {
+      this.service.getUserData(this.userData.id).subscribe(data =>
+      {
+        this.user = data;
+  
+        for (var i = 0; i < this.user.productsCart.length; i++) {
+          this.cart[i] = { title: this.user.productsCart[i].title, 
+            platform: this.user.productsCart[i].platform, price: this.user.productsCart[i].price};
 
-      for (var i = 0; i < this.user.productsCart.length; i++) {
-         this.cart[i] = { title: this.user.productsCart[i].title, 
-           platform: this.user.productsCart[i].platform, price: this.user.productsCart[i].price};
-
-           this.count++;
-      }
-
-      this.cart[this.count] = { title: title, platform: platform, price: price};
-      this.count = 0;
+          this.count++;
+        }
+  
+        this.cart[this.count] = { title: title, platform: platform, price: price};
+        this.count = 0;
+        
+        console.log(this.cart);
       
-      console.log(this.cart);
-    
-      this.service.updateUser(this.userData.id, this.user.firstName, this.user.lastName, 
-        this.user.email, this.user.userName, this.user.password, this.cart).subscribe();
-    })
-  }
-
-  getPlatformLink () {
-    if (this.products.platform == "PS4") {
-      this.platformImage = "https://cdn3.iconfinder.com/data/icons/flat-icons-web/40/PlayStation-512.png";
-    } 
-    else if (this.products.platform == "XBOX") {
-      this.platformImage = "https://cdn2.iconfinder.com/data/icons/metro-uinvert-dock/256/XBox_360.png";
-    }
-    else if (this.products.platform == "PC") {
-      this.platformImage = "http://simpleicon.com/wp-content/uploads/pc.png";
-    }
-    else if (this.products.platforme == "SWITCH") {
-      this.platformImage = "https://vignette.wikia.nocookie.net/crypt-of-the-necrodancer/images/f/fc/Nintendo_Switch_icon.png/revision/latest?cb=20180517200137";
-    }
-
-    console.log(this.products.platform);
-  }
+        this.service.updateUser(this.userData.id, this.user.firstName, this.user.lastName, 
+          this.user.email, this.user.userName, this.user.password, this.cart).subscribe();
+      })
+    } //else
+  } 
   
   Resize(event) {
     const size = event.target.innerWidth;

@@ -119,6 +119,8 @@ app.delete('/api/posts/:id', function(req,res){
     function (err) {});
 })
 
+
+
 //USER CODE
 //POST method which console logs data passed up to the server
 app.post('/api/users', function (req, res) {
@@ -177,3 +179,10 @@ app.put('/api/users/:id', function(req,res){
      console.log("Get " + data);
     });
 });
+
+//delete the data from the server using the id
+app.delete('/api/users/:id', function(req,res){
+    console.log("Get " + req);
+    PostModelUser.deleteOne({ _id: req.params.id },
+    function (err) {});
+})

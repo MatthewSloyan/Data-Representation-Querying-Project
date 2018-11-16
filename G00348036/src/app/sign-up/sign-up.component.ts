@@ -12,7 +12,6 @@ export class SignUpComponent implements OnInit {
 
   constructor(private service: ProductsUserService) {}
 
-
   onSignup(form: NgForm) {
     
     const cart: ProductCart[] = [

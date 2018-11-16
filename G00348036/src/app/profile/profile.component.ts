@@ -12,11 +12,17 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class ProfileComponent implements OnInit {
 
-  constructor(private service: ProductsUserService, private c: AppComponent) { }
+  constructor(private service: ProductsUserService, private c: AppComponent, private router: Router) { }
 
   users: any = [];
   id: String;
   userData: any;
+
+  userDataInitial = {
+    userName: "",
+    id: "",
+    isLoggedIn: false,
+  }
 
   ngOnInit() {
     this.userData = JSON.parse(sessionStorage.getItem('user'));
@@ -29,8 +35,13 @@ export class ProfileComponent implements OnInit {
   }
 
   onLogOut() {
-    sessionStorage.clear();
-    this.c.userData = "";
-    this.ngOnInit();
+    sessionStorage.setItem('user', JSON.stringify(this.userDataInitial));
+    this.c.onLogOut();
+
+    this.router.navigate(['/login']);
+
+    //sessionStorage.clear();
+    //this.c.userData = "";
+    //this.ngOnInit();
   }
 }

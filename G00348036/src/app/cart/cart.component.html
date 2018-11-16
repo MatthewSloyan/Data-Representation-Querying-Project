@@ -1,10 +1,19 @@
-<mat-list>
+<mat-list class="hoverable">
   <h3 mat-subheader>Items</h3>
-  <mat-list-item *ngFor="let c of cart">
-    <mat-icon mat-list-icon>folder</mat-icon>
+  <mat-list-item class="cart-list" *ngFor="let c of cart; index as i">
+    <img mat-list-icon src="{{platformImage[i]}}" alt="Cannot display image">
     <h4 mat-line>{{c.title}}</h4>
     <p mat-line> {{c.platform}} </p>
+    <button (click)="onDelete(c._id)" mat-button color="warn">DELETE</button> &nbsp;&nbsp;
+    <b>€{{ c.price }}.00</b>
     <mat-divider></mat-divider>
+  </mat-list-item>
+  <mat-list-item >
+    <mat-icon matListIcon>attach_money</mat-icon>
+    <h4 mat-line>Total</h4>
+    <b>€{{ total }}.00</b>
   </mat-list-item>
   <mat-divider></mat-divider>
 </mat-list>
+
+<button  mat-button color="warn">PURCHASE</button>

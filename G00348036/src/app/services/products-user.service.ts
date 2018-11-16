@@ -57,6 +57,11 @@ export class ProductsUserService {
     //console.log(user);
   } 
 
+  //send a delete request to the server
+  deleteCartItem(id: string):Observable<any>{
+    return this.http.delete("http://localhost:8081/api/users/"+id);
+  }
+
   //gets posted data
   getUser() {
     return [...this.loginUser];
