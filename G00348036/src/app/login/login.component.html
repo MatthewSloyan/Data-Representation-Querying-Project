@@ -1,44 +1,36 @@
-<mat-card *ngIf="userStorage.isLoggedIn == false">
+<mat-card *ngIf="userStorage.isLoggedIn == false" class="login-card">
   <form (submit)="onLogin(postForm)" #postForm="ngForm">
 
+    <mat-icon matPrefix>person</mat-icon> &nbsp;
     <mat-form-field class="input-width">
       <mat-label>UserName</mat-label>
-      <input 
-        matInput 
-        type="text" 
-        name="userName" 
-        ngModel 
-        required 
-        minlength="3" 
-        #userName="ngModel">
+      <input matInput type="text" name="userName" ngModel required minlength="3" #userName="ngModel">
       <mat-error *ngIf="userName.invalid">Please enter a valid user name.</mat-error>
     </mat-form-field>
 
     <br>
 
+    <mat-icon matPrefix>verified_user</mat-icon> &nbsp;
     <mat-form-field class="input-width">
       <mat-label>Password</mat-label>
-      <input 
-        matInput 
-        type="password" 
-        name="password" 
-        ngModel 
-        required 
-        minlength="3" 
-        #password="ngModel">
-      <mat-error *ngIf="password.invalid">Please enter a valid user name.</mat-error>
+      <input matInput type="password" name="password" ngModel required minlength="3" #password="ngModel">
+      <mat-error *ngIf="password.invalid">Please enter a valid password.</mat-error>
     </mat-form-field>
 
     <br>
 
-    <button mat-raised-button color="primary" type="submit">Login</button>
+    <button mat-button color="primary" type="submit" class="login-button">
+      LOGIN &nbsp;<mat-icon matSuffix>send</mat-icon> 
+    </button>
   </form>
 </mat-card>
 
-<mat-card *ngIf="userStorage.isLoggedIn != false">
+<mat-card *ngIf="userStorage.isLoggedIn != false" class="login-card">
     <mat-card-content>
         <p>Please log out, to change users.</p>
     </mat-card-content>
 
-  <button mat-raised-button color="primary" (click)="onLogOut()">Log Out</button>
+    <button mat-button color="primary" (click)="onLogOut()">
+        LOG OUT &nbsp;<mat-icon matSuffix>send</mat-icon> 
+    </button>
 </mat-card>

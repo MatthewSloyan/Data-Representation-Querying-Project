@@ -1,3 +1,14 @@
 .input-width {
     width:350px;
 }
+
+.signup-card {
+    width:390px;
+    margin: 0 auto;
+    top: 50px;
+    box-shadow: 0px 5px 25px rgb(226, 226, 226);
+}
+
+.signup-button {
+    right: -250px;
+}

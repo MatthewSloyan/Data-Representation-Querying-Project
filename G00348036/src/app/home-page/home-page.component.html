@@ -12,7 +12,7 @@
             <p>{{ product.description }}</p>
         </mat-card-content>
         <mat-card-actions>
-          <b>€{{ product.price }}.00</b>
+            &nbsp;&nbsp;<b>€{{ product.price }}.00</b>
           <button mat-button color="primary" (click)="addToCart(product.title, product.platform, product.price)">ADD TO CART</button>
           <button mat-button *ngIf="userStorage.userName == 'Admin'" (click)="onDelete(product._id)" color="warn">DELETE</button>
         </mat-card-actions>

@@ -1,10 +1,29 @@
-<mat-card *ngIf="userData.isLoggedIn != false">
-    <mat-card-content>
-        <p><b>Name:</b> {{ users.firstName }} {{ users.lastName }}</p>
-        <p><b>Email:</b> {{ users.email }}</p>
-        <p><b>Username:</b> {{ users.userName }}</p>
-        <p><b>Password:</b> {{ users.password }}</p>
-    </mat-card-content>
+<mat-card *ngIf="userData.isLoggedIn != false" class="profile-card">
+    <mat-list>
+        <h3 mat-subheader>{{ users.userName }}'s Profile</h3>
+        <mat-list-item >
+            <mat-icon matListIcon>person_pin</mat-icon>
+            <p mat-line> {{ users.firstName }} {{ users.lastName }}</p>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item >
+            <mat-icon matListIcon>email</mat-icon>
+            <p mat-line> {{ users.email }}</p>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item >
+            <mat-icon matListIcon>person</mat-icon>
+            <p mat-line> {{ users.userName }}</p>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+        <mat-list-item >
+            <mat-icon matListIcon>verified_user</mat-icon>
+            <p mat-line> {{ users.password }}</p>
+        </mat-list-item>
+        <mat-divider></mat-divider>
+    </mat-list>
+
+    <br>
 
     <button mat-button color="primary" [routerLink]="['/edit', userData.id]">EDIT</button>
 

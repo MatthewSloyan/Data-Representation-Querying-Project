@@ -1,3 +1,14 @@
 .input-width {
-    width:350px;
+    width:430px;
+}
+
+.add-card {
+    width:470px;
+    margin: 0 auto;
+    top: 50px;
+    box-shadow: 0px 5px 25px rgb(226, 226, 226);
+}
+
+.add-button {
+    right: -350px;
 }

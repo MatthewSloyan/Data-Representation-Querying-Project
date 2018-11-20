@@ -1,4 +1,4 @@
-<mat-card>
+<mat-card class="signup-card">
   <form (submit)="onSignup(postForm)" #postForm="ngForm">
 
     <mat-form-field class="input-width">
@@ -41,6 +41,9 @@
 
     <br>
 
-    <button mat-raised-button color="primary" type="submit">Sign Up</button>
+    <button mat-button type="submit" color="primary" class="signup-button">
+        SIGN UP &nbsp;
+        <mat-icon matSuffix>send</mat-icon> 
+    </button>
   </form>
 </mat-card>

@@ -1,7 +1,7 @@
-<mat-card>
+<mat-card class="add-card">
     <form (submit)="onAddProduct(postForm)" #postForm="ngForm">
   
-      <mat-icon matPrefix>games</mat-icon> &nbsp;
+      <mat-icon>games</mat-icon> &nbsp;
       <mat-form-field class="input-width">
         <mat-label>Product Title</mat-label>
         <input  matInput type="text" name="title" ngModel required minlength="3" #title="ngModel">
@@ -10,7 +10,7 @@
 
       <br>
 
-      <mat-icon matPrefix>videogame_asset</mat-icon> &nbsp;
+      <mat-icon>videogame_asset</mat-icon> &nbsp;
       <mat-form-field>
         <mat-select [(ngModel)]="platform" required name="platform" placeholder="Platform">
           <mat-option value="PS4">PS4</mat-option>
@@ -51,9 +51,9 @@
 
       <br>
 
-        <button mat-icon-button type="submit" color="primary">
-            Add Product
-            <mat-icon matSuffix>send</mat-icon> 
-        </button>
+      <button mat-button type="submit" color="primary" class="add-button">
+          Add Product
+          <mat-icon matSuffix>send</mat-icon> 
+      </button>
     </form>
   </mat-card>
