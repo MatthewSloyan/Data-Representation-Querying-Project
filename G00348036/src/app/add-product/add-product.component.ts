@@ -11,13 +11,16 @@ export class AddProductComponent implements OnInit {
 
   constructor(private service: ProductsUserService) { }
 
-  colour: string = "primary";
-
+  //add a product to the database using the service and passing up each value from the form 
   onAddProduct(form: NgForm) {
+    
+    //form validation
+    if (!form.valid) {
+      return;
+    }
+
     this.service.addProduct(form.value.title, form.value.platform, form.value.price, form.value.description, form.value.link).subscribe();
     form.resetForm();
-
-    console.log("Hello " + form.value.platform);
   }
 
   ngOnInit() {

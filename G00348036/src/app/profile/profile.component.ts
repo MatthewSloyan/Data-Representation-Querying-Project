@@ -15,33 +15,24 @@ export class ProfileComponent implements OnInit {
   constructor(private service: ProductsUserService, private c: AppComponent, private router: Router) { }
 
   users: any = [];
-  id: String;
   userData: any;
 
-  userDataInitial = {
-    userName: "",
-    id: "",
-    isLoggedIn: false,
-  }
-
   ngOnInit() {
+    //get the user data from session storage
     this.userData = JSON.parse(sessionStorage.getItem('user'));
-    console.log("Test" + this.userData.userName);
 
+    //get the details of the user from the users id in storage
     this.service.getUserData(this.userData.id).subscribe(data =>{
       this.users = data;
-      console.log(this.users);
     });
   }
 
+  //log the user out and set the session storage values to null
   onLogOut() {
-    sessionStorage.setItem('user', JSON.stringify(this.userDataInitial));
-    this.c.onLogOut();
+
+    //call the app.component.ts method to refresh the toolbar
+    this.c.onLogOut(); 
 
     this.router.navigate(['/login']);
-
-    //sessionStorage.clear();
-    //this.c.userData = "";
-    //this.ngOnInit();
   }
 }

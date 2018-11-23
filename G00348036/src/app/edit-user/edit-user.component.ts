@@ -14,34 +14,30 @@ export class EditUserComponent implements OnInit {
 
   constructor(private router: Router, private route: ActivatedRoute, private service: ProductsUserService, private c: AppComponent) { }
 
-  user: any = [];
-
-  userDataInitial = {
-    userName: "",
-    id: "",
-    isLoggedIn: false,
-  }
+  user: any = []; //array of found user
 
   ngOnInit() {
-    console.log(this.route.snapshot.params['id']);
-
+    //get user data using the id passed through the url
     this.service.getUserData(this.route.snapshot.params['id']).subscribe(data =>
     {
       this.user = data;
-      console.log(this.user);
     })
   }
 
+  //when the form data is entered and valid update the database with the information
   onEditUser(form: NgForm) {
-    this.service.updateUser(this.user._id, form.value.firstName, form.value.lastName, form.value.email, form.value.userName, form.value.password, this.user.productsCart).subscribe();
-    //this.ngOnInit();
+    //form validation
+    if (!form.valid) {
+      return;
+    }
 
-    this.onLogOut();
-    this.router.navigate(['/profile']); 
-  }
+    //update the database with the user data, using the same update function as delete and add to cart 
+    this.service.updateUser(this.user._id, form.value.firstName, form.value.lastName, form.value.email, 
+      form.value.userName, form.value.password, this.user.productsCart).subscribe();
 
-  onLogOut() {
-    sessionStorage.setItem('user', JSON.stringify(this.userDataInitial));
+    //call the component file to log the user out
     this.c.onLogOut();
+
+    this.router.navigate(['/profile']); 
   }
 }

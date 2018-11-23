@@ -1,19 +1,31 @@
-<mat-list class="hoverable">
-  <h3 mat-subheader>Items</h3>
-  <mat-list-item class="cart-list" *ngFor="let c of cart; index as i">
-    <img mat-list-icon src="{{platformImage[i]}}" alt="Cannot display image">
-    <h4 mat-line>{{c.title}}</h4>
-    <p mat-line> {{c.platform}} </p>
-    <button (click)="onDelete(c._id)" mat-button color="warn">DELETE</button> &nbsp;&nbsp;
-    <b>€{{ c.price }}.00</b>
+<!-- Mat card with list of cart items for each user -->
+<mat-card class="cart-card" *ngIf="userData.isLoggedIn != false">
+  <mat-list class="hoverable">
+    <h3 mat-subheader>Cart Items</h3>
+    <mat-list-item class="cart-list" *ngFor="let c of cart; index as i">
+      <img mat-list-icon src="{{platformImage[i]}}" alt="Cannot display image">
+      <h4 mat-line>{{c.title}}</h4>
+      <p mat-line> {{c.platform}} </p>
+      <button (click)="removeFromCart(c._id)" mat-button color="warn">DELETE</button> &nbsp;&nbsp;
+      <b>€{{ c.price }}.00</b>
+      <mat-divider></mat-divider>
+    </mat-list-item>
+    <mat-list-item >
+      <mat-icon matListIcon>attach_money</mat-icon>
+      <h4 mat-line>Total</h4>
+      <b>€{{ total }}.00</b>
+    </mat-list-item>
     <mat-divider></mat-divider>
-  </mat-list-item>
-  <mat-list-item >
-    <mat-icon matListIcon>attach_money</mat-icon>
-    <h4 mat-line>Total</h4>
-    <b>€{{ total }}.00</b>
-  </mat-list-item>
-  <mat-divider></mat-divider>
-</mat-list>
+  </mat-list>
 
-<button  mat-button color="warn">PURCHASE</button>
+  <button  mat-button color="warn">PURCHASE</button>
+</mat-card>
+
+<!-- Display message if not logged in -->
+<mat-card *ngIf="userData.isLoggedIn == false" class="cart-card">
+  <mat-card-content>
+      <p>Please log in to view your cart.</p>
+  </mat-card-content>
+
+<button mat-raised-button color="primary" [routerLink]="['/login']">Log In</button>
+</mat-card>

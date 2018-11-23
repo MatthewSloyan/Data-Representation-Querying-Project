@@ -1,3 +1,4 @@
+<!-- Mat card with a list of profile details and icons -->
 <mat-card *ngIf="userData.isLoggedIn != false" class="profile-card">
     <mat-list>
         <h3 mat-subheader>{{ users.userName }}'s Profile</h3>
@@ -30,7 +31,8 @@
     <button mat-raised-button color="primary" (click)="onLogOut()">Log Out</button>
 </mat-card>
 
-<mat-card *ngIf="userData.isLoggedIn == false">
+<!-- Display message if not logged in -->
+<mat-card *ngIf="userData.isLoggedIn == false" class="profile-card">
     <mat-card-content>
         <p>Please log in to view your profile.</p>
     </mat-card-content>

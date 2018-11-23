@@ -9,8 +9,6 @@ import { Router } from '@angular/router';
 export class AppComponent {
   title = 'G00348036';
 
-  //userData: any;
-
   userData = {
     userName: "",
     id: "",
@@ -30,13 +28,14 @@ export class AppComponent {
     this.router.navigate(['/home']);
   }
 
+  //initalize the session storage back to the default
   onLogOut() {
     sessionStorage.setItem('user', JSON.stringify(this.logOut));
     this.userData = this.logOut;
   }
 
+  //get the user logged in data from storage 
   onLogin() {
       this.userData = JSON.parse(sessionStorage.getItem('user'));
-      console.log(this.userData);
     }
 }

@@ -1,9 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import {HttpClientModule} from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+//material imports
 import { MatInputModule,
   MatCardModule,
   MatButtonModule,
@@ -20,7 +20,6 @@ import { MatInputModule,
 
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule } from '@angular/forms';
-
 import { LayoutModule } from '@angular/cdk/layout';
 
 //components
@@ -33,6 +32,7 @@ import { ProfileComponent } from './profile/profile.component';
 import { EditUserComponent } from './edit-user/edit-user.component';
 import { CartComponent } from './cart/cart.component';
 
+//routes
 const appRoutes: Routes = [
   { path: 'home', component: HomePageComponent },
   { path: 'add', component: AddProductComponent },

@@ -1,0 +1,14 @@
+.input-width {
+    width:350px;
+}
+
+.edit-card {
+    width:390px;
+    margin: 0 auto;
+    top: 50px;
+    box-shadow: 0px 5px 25px rgb(226, 226, 226);
+}
+
+.edit-button {
+    right: -280px;
+}

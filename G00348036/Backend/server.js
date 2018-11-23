@@ -1,3 +1,5 @@
+//SERVER SETUP ===============
+
 var express = require('express');
 var app = express();
 var path = require('path');
@@ -11,39 +13,6 @@ app.use(bodyParser.json());
 var mongoose = require('mongoose');
 var mongoDB = 'mongodb://Matthew:designwest43@ds145053.mlab.com:45053/data_representation_project';
 mongoose.connect(mongoDB);
-
-//PRODUCT
-//using the interface variables 
-var Schema = mongoose.Schema;
-var productSchema = new Schema({
-    title : String,
-    platform : String,
-    price : Number,
-    description : String,
-    link : String
-})
-
-var PostModel = mongoose.model('product', productSchema);
-
-var SchemaCart = mongoose.Schema;
-var CartSchema = new SchemaCart({ title: String, platform: String, price: Number });
-
-//USER
-//using the interface variables 
-var SchemaUser = mongoose.Schema;
-var productSchemaUser = new SchemaUser({
-    firstName : String,
-    lastName : String,
-    email : String,
-    userName : String,
-    password : String,
-    productsCart: [CartSchema],
-    //productsCart: {
-        //productsCart: { productsCart: any }
-    //},
-})
-
-var PostModelUser = mongoose.model('user', productSchemaUser);
 
 //coors setup
 app.use(function(req, res, next) {
@@ -60,15 +29,52 @@ var server = app.listen(8081, function ()  {
     var port = server.address().port
     
     console.log("Example app listening at http://%s:%s", host, port)
- })
+})
+
+//PRODUCT SCHEMA ===============
+//using the interface variables 
+var Schema = mongoose.Schema;
+var productSchema = new Schema({
+    title : String,
+    platform : String,
+    price : Number,
+    description : String,
+    link : String
+})
+
+var PostModel = mongoose.model('product', productSchema);
+
+//USER/CART SCHEMA ===============
+
+//create a separate schema for the cart. It's an object that will be passed into the array
+var SchemaCart = mongoose.Schema;
+var CartSchema = new SchemaCart({ title: String, platform: String, price: Number });
+
+//create another scheme for the user using the interface variables and pass in the above schema as an array
+//to get a nested document
+var SchemaUser = mongoose.Schema;
+var productSchemaUser = new SchemaUser({
+    firstName : String,
+    lastName : String,
+    email : String,
+    userName : String,
+    password : String,
+    productsCart: [CartSchema],
+})
+
+var PostModelUser = mongoose.model('user', productSchemaUser);
+
+//FUNCTIONS ===============
 
 //welcome message
 app.get('/', function (req, res) {
    res.send('Welcome to Data Representation & Querying Project\n');
 })
 
-//return JSON data when requested 
-app.get('/api/posts', function (req, res) {
+//PRODUCTS ===============
+
+//return JSON data when requested, gets all products
+app.get('/api/products', function (req, res) {
 
     PostModel.find(function(err, data){
         if (err){
@@ -78,29 +84,8 @@ app.get('/api/posts', function (req, res) {
     });
 })
 
-/* app.get('/getposts/:title', function (req, res) {
-    console.log("Get " + req.params.title + " Post");
-    PostModel.findOne({ 'title': req.params.title },
-
-    function (err, data) {
-        if (err)
-        return handleError(err);
-        res.json(data);
-    });
-}); */
-
-//PostModel.findOne({ title: 'Hi' }, function (err) {
-    //if (err) return handleError(err);
-    // deleted at most one post document
-//});
-
 //POST method which console logs data passed up to the server
-app.post('/api/posts', function (req, res) {
-    console.log("Title = " + req.body.title);
-    console.log("Platform = " + req.body.platform);
-    console.log("Price = " + req.body.price);
-    console.log("Description = " + req.body.description);
-    console.log("Link = " + req.body.link);
+app.post('/api/products', function (req, res) {
 
     //mongo post
     PostModel.create({
@@ -114,22 +99,15 @@ app.post('/api/posts', function (req, res) {
 })
 
 //delete the data from the server using the id
-app.delete('/api/posts/:id', function(req,res){
+app.delete('/api/products/:id', function(req,res){
     PostModel.deleteOne({ _id: req.params.id },
     function (err) {});
 })
 
+//USERS ===============
 
-
-//USER CODE
-//POST method which console logs data passed up to the server
+//POST method which console logs data passed up to the server (adds a user)
 app.post('/api/users', function (req, res) {
-    console.log("Title = " + req.body.firstName);
-    console.log("Platform = " + req.body.lastName);
-    console.log("Price = " + req.body.email);
-    console.log("Description = " + req.body.userName);
-    console.log("Link = " + req.body.password);
-    console.log("Cart = " + req.body.productsCart);
 
     //mongo post
     PostModelUser.create({
@@ -143,7 +121,7 @@ app.post('/api/users', function (req, res) {
     res.send('User added');
 })
 
-//return JSON data when requested 
+//return JSON data when requested (gets all users)
 app.get('/api/users', function (req, res) {
 
     PostModelUser.find(function(err, data){
@@ -151,12 +129,11 @@ app.get('/api/users', function (req, res) {
             res.send(err);
         }
         res.json(data);
-        console.log(data);
     });
 })
 
+//get a specific user using the id
 app.get('/api/users/:id', function (req, res) {
-    //console.log("Get " + req.params.userName + " Post");
     PostModelUser.findOne({ _id: req.params.id },
 
     function (err, data) {
@@ -166,23 +143,19 @@ app.get('/api/users/:id', function (req, res) {
         else {
             res.json(data);
         }
-        
-       // console.log("Get " + data);
     });
 });
 
+//update a specific user using the id
 app.put('/api/users/:id', function(req,res){
     PostModelUser.findByIdAndUpdate(req.params.id, req.body, function (err, data) {
-    if (err) return next(err);
-    res.json(data);
-
-     console.log("Get " + data);
+        if (err) return next(err);
+        res.json(data);
     });
 });
 
 //delete the data from the server using the id
-app.delete('/api/users/:id', function(req,res){
-    console.log("Get " + req);
-    PostModelUser.deleteOne({ _id: req.params.id },
-    function (err) {});
-})
+//app.delete('/api/users/:id', function(req,res){
+   // PostModelUser.deleteOne({ _id: req.params.id },
+    //function (err) {});
+//})

@@ -25,6 +25,7 @@
   </form>
 </mat-card>
 
+<!-- display message if user is not logged in -->
 <mat-card *ngIf="userStorage.isLoggedIn != false" class="login-card">
     <mat-card-content>
         <p>Please log out, to change users.</p>
@@ -33,4 +34,4 @@
     <button mat-button color="primary" (click)="onLogOut()">
         LOG OUT &nbsp;<mat-icon matSuffix>send</mat-icon> 
     </button>
-</mat-card>
+</mat-card> 

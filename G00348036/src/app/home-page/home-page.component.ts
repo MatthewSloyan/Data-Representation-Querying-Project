@@ -16,15 +16,9 @@ export class HomePageComponent implements OnInit {
 
   products: any = [];
   columns: any = 4;
-  platformName: any;
   platformImage: any = [];
-  //platformImage: any = "https://cdn3.iconfinder.com/data/icons/flat-icons-web/40/PlayStation-512.png";
-  //platformImage: any = [];
-  //descriptionSubString: any = [];
-
   user: any = [];
   userStorage: any;
-  //cart: ProductCart[];
   userData: any = [];
 
   cart: ProductCart[] = [];
@@ -32,24 +26,20 @@ export class HomePageComponent implements OnInit {
 
   ngOnInit() {
 
+    //get user data from session storage
     this.userStorage = JSON.parse(sessionStorage.getItem('user'));
 
+    //get all products from the database
     this.service.getProductData().subscribe(data =>{
       this.products = data;
-      //this.platformName = data.platform;
-      //console.log(this.products[7].platform);
 
-      //for (let i of this.products) {
-        //console.log(i);
-        
-      //}
-      //console.log(this.products.description.substr(0,20));
-      //this.products.description = this.products.description.substr(0,20);
-
+      //loop through each product
       for (var i = 0; i < this.products.length; i++) {
   
+        //shorten the descript to keep consistenecy
         this.products[i].description = this.products[i].description.substr(0,140) + "...";
 
+        //depending on the platform set the image to be displayed
         if (this.products[i].platform == "PS4") { 
           this.platformImage[i] = "https://cdn3.iconfinder.com/data/icons/flat-icons-web/40/PlayStation-512.png";
         } 
@@ -63,12 +53,10 @@ export class HomePageComponent implements OnInit {
           this.platformImage[i] = "https://i.ytimg.com/vi/iTadxMf75As/maxresdefault.jpg";
         }
       }
-
-      //console.log(this.descriptionSubString);
-      //this.descriptionSubString = this.products.platform.substr(1,2)
     });
   }
 
+  //delete a product from the database, this is only available to the admin
   onDelete(id: string){
     console.log("Deleting item")
     this.service.deleteProduct(id).subscribe(() => 
@@ -78,20 +66,24 @@ export class HomePageComponent implements OnInit {
     });
   }
 
+  //add selected product to user specific cart
   addToCart(title: string, platform: string, price: number){
 
     this.userData = JSON.parse(sessionStorage.getItem('user'));
 
+    //display error message if the user isn't logged in
     if (this.userData.isLoggedIn == false){
       this.snackBar.open('Please login to add to cart!', 'Undo', {
         duration: 2000
       });
     }
     else {
+      //get user data using the id from session storage
       this.service.getUserData(this.userData.id).subscribe(data =>
       {
         this.user = data;
   
+        //loop through each product already in the cart and add them to a new array
         for (var i = 0; i < this.user.productsCart.length; i++) {
           this.cart[i] = { title: this.user.productsCart[i].title, 
             platform: this.user.productsCart[i].platform, price: this.user.productsCart[i].price};
@@ -99,17 +91,21 @@ export class HomePageComponent implements OnInit {
           this.count++;
         }
   
+        //then add the new product to the end of the array
         this.cart[this.count] = { title: title, platform: platform, price: price};
         this.count = 0;
-        
-        console.log(this.cart);
       
+        //update the database with the new edited cart array, using the same update function as update user and add to cart 
         this.service.updateUser(this.userData.id, this.user.firstName, this.user.lastName, 
           this.user.email, this.user.userName, this.user.password, this.cart).subscribe();
       })
     } //else
   } 
   
+  //coded this using the below source as a help.
+  //https://stackoverflow.com/questions/43891840/responsive-design-using-md-grid-list-in-angular-2/44846224#44846224
+
+  //depending on the size of the screen the number of colums will change to be responsive
   Resize(event) {
     const size = event.target.innerWidth;
     

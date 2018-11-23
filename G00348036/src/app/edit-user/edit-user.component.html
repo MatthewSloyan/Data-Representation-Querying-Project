@@ -1,6 +1,8 @@
-<mat-card>
+<!-- mat card and form which allows the user to update their details. -->
+<mat-card class="edit-card">
   <form (submit)="onEditUser(postForm)" #postForm="ngForm">
 
+    <mat-icon matPrefix>person_pin</mat-icon> &nbsp;
     <mat-form-field class="input-width">
       <mat-label>First Name</mat-label>
         <input matInput type="text" name="firstName" ngModel={{user.firstName}} required #firstName="ngModel">
@@ -9,6 +11,7 @@
 
     <br>
 
+    <mat-icon matPrefix>person_pin</mat-icon> &nbsp;
     <mat-form-field class="input-width">
       <mat-label>Last Name</mat-label>
         <input matInput type="text" name="lastName" ngModel={{user.lastName}} required #lastName="ngModel">
@@ -17,6 +20,7 @@
 
     <br>
 
+    <mat-icon matPrefix>email</mat-icon> &nbsp;
     <mat-form-field class="input-width">
       <mat-label>Email</mat-label>
         <input matInput type="email" name="email" ngModel={{user.email}} required #email="ngModel">
@@ -25,6 +29,7 @@
 
     <br>
 
+    <mat-icon matPrefix>person</mat-icon> &nbsp;
     <mat-form-field class="input-width">
       <mat-label>User Name</mat-label>
         <input matInput type="text" name="userName" ngModel={{user.userName}} required minlength="3" #userName="ngModel">
@@ -33,6 +38,7 @@
 
     <br>
 
+    <mat-icon matPrefix>verified_user</mat-icon> &nbsp;
     <mat-form-field class="input-width">
       <mat-label>Password</mat-label>
       <input matInput type="password" name="password" ngModel={{user.password}} required minlength="3" #password="ngModel">
@@ -41,6 +47,9 @@
 
     <br>
 
-    <button mat-raised-button color="primary" type="submit">EDIT</button>
+    <button mat-button type="submit" color="primary" class="edit-button">
+      EDIT &nbsp;
+      <mat-icon matSuffix>send</mat-icon> 
+  </button>
   </form>
 </mat-card>
