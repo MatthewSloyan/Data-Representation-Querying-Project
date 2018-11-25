@@ -28,6 +28,8 @@
 
     <button mat-button color="primary" [routerLink]="['/edit', userData.id]">EDIT</button>
 
+    <button mat-button (click)="onDelete(users._id)" color="warn">DELETE</button>
+
     <button mat-raised-button color="primary" (click)="onLogOut()">Log Out</button>
 </mat-card>
 

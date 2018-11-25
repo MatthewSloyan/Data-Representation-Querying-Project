@@ -27,6 +27,17 @@ export class ProfileComponent implements OnInit {
     });
   }
 
+   //delete a user from the database, and logout
+   onDelete(id: string){
+    this.service.deleteUser(id).subscribe(() => 
+    {
+      //call the app.component.ts method to refresh the toolbar
+      this.ngOnInit();
+    });
+
+    this.onLogOut();
+  }
+
   //log the user out and set the session storage values to null
   onLogOut() {
 

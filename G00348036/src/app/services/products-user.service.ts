@@ -61,6 +61,11 @@ export class ProductsUserService {
     return this.http.post("http://127.0.0.1:8081/api/users", user);
   }
 
+  //send a delete request to the server, which deletes a user
+  deleteUser(id: string):Observable<any>{
+    return this.http.delete("http://localhost:8081/api/users/"+id);
+  }
+
   //update the user collection with the id 
   //this one method is used to update the users details, add products to the cart and remove products (resusablity)
   updateUser(id: string, firstName: string, lastName: string, email: number, userName: string, password: string, productsCart: ProductCart[]): Observable<any> {
@@ -68,11 +73,6 @@ export class ProductsUserService {
 
     return this.http.put("http://localhost:8081/api/users/"+id, user);
   } 
-
-  //send a delete request to the server
-  //deleteCartItem(id: string):Observable<any>{
-    //return this.http.delete("http://localhost:8081/api/users/"+id);
-  //}
 
   //LOGIN CODE ================================
 

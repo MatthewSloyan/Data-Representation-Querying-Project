@@ -24,7 +24,14 @@ export class AppComponent {
   constructor(private router: Router) { }
 
   ngOnInit() {
-    sessionStorage.setItem('user', JSON.stringify(this.userData));
+    //get the data from session storage, if the user is already logged in it will exist
+    //this.userData = JSON.parse(sessionStorage.getItem('user'));
+
+    //if it doesn't exist then the user is logged out so set the initial values.
+    //if (this.userData == null){
+      sessionStorage.setItem('user', JSON.stringify(this.userData));
+    //}
+
     this.router.navigate(['/home']);
   }
 

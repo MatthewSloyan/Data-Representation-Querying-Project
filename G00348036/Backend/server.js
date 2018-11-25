@@ -154,8 +154,8 @@ app.put('/api/users/:id', function(req,res){
     });
 });
 
-//delete the data from the server using the id
-//app.delete('/api/users/:id', function(req,res){
-   // PostModelUser.deleteOne({ _id: req.params.id },
-    //function (err) {});
-//})
+//delete the user data from the server using the id
+app.delete('/api/users/:id', function(req,res){
+    PostModelUser.deleteOne({ _id: req.params.id },
+    function (err) {});
+})

@@ -26,6 +26,12 @@ export class LoginComponent implements OnInit {
   }
 
   onLogin(form: NgForm) {
+
+      //form validation
+      if (!form.valid) {
+        return;
+      }
+      
       //get all users from the database to compare inputs against 
       this.service.getLoginData().subscribe(data =>{
       this.user = data;
@@ -49,6 +55,8 @@ export class LoginComponent implements OnInit {
           //call the login function from the app.component.ts
           this.c.onLogin();
           this.router.navigateByUrl('home');
+
+          return;
         }
       }
 
