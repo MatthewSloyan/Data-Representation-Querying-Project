@@ -31,6 +31,13 @@ var server = app.listen(8081, function ()  {
     console.log("Example app listening at http://%s:%s", host, port)
 })
 
+//Run Application on server
+app.use("/", express.static(path.join(__dirname, "angular")));
+
+app.get('/', function(req, res){
+    res.sendFile(path.join(__dirname, "angular", "index.html"));
+})
+
 //PRODUCT SCHEMA ===============
 //using the interface variables 
 var Schema = mongoose.Schema;
@@ -66,11 +73,6 @@ var PostModelUser = mongoose.model('user', productSchemaUser);
 
 //FUNCTIONS ===============
 
-//welcome message
-app.get('/', function (req, res) {
-   res.send('Welcome to Data Representation & Querying Project\n');
-})
-
 //PRODUCTS ===============
 
 //return JSON data when requested, gets all products
@@ -95,7 +97,8 @@ app.post('/api/products', function (req, res) {
         description:req.body.description,
         link:req.body.link
     })
-    res.send('Product added');
+    res.status(201).json({message: "Product Created"});
+    console.log("Product Created");
 })
 
 //delete the data from the server using the id
@@ -118,7 +121,8 @@ app.post('/api/users', function (req, res) {
         password:req.body.password,
         productsCart:req.body.productsCart,
     })
-    res.send('User added');
+    res.status(201).json({message: "User Created"});
+    console.log("User Created");
 })
 
 //return JSON data when requested (gets all users)

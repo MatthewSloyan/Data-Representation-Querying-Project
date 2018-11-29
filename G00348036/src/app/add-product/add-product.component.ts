@@ -11,6 +11,8 @@ export class AddProductComponent implements OnInit {
 
   constructor(private service: ProductsUserService) { }
 
+  platform: any;
+
   //add a product to the database using the service and passing up each value from the form 
   onAddProduct(form: NgForm) {
     
@@ -24,7 +26,6 @@ export class AddProductComponent implements OnInit {
   }
 
   ngOnInit() {
-    
   }
 
 }
